@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge - Master Your Future</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.2), transparent),
+                        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.2), transparent),
+                        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.2), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(99, 102, 241, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: rgba(148, 163, 184, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 1.5s ease;
+            width: 0;
+        }
+
+        .skill-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 5rem 0;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .course-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--warning-color);
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Learning Paths */
+        .learning-paths {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .paths-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .path-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .path-card:hover::after {
+            top: -100%;
+            right: -100%;
+        }
+
+        .path-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .path-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .path-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .path-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .path-steps {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Statistics */
+        .stats {
+            padding: 5rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+            position: absolute;
+            width: 100%;
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--text-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">SkillForge</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#paths">Learning Paths</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">
+            <i class="fas fa-code"></i>
+        </div>
+        <div class="floating-element" style="top: 70%; right: 15%; font-size: 2.5rem;">
+            <i class="fas fa-palette"></i>
+        </div>
+        <div class="floating-element" style="bottom: 20%; left: 20%; font-size: 2rem;">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Master Your Future with SkillForge</h1>
+            <p>Unlock your potential with cutting-edge courses, personalized learning paths, and expert mentorship. Transform your career today.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('courses')">
+                    Explore Courses <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('skills')">
+                    Assess Skills <i class="fas fa-chart-bar"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Skills in Demand</h2>
+                <p>Discover the most sought-after skills in today's job market</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="web">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Web Development</h3>
+                            <p>Frontend & Backend</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="85"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 12.5k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-skill="data">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Data Science</h3>
+                            <p>Analytics & ML</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="78"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 8.3k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-skill="design">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>UI/UX Design</h3>
+                            <p>Design & Prototyping</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="92"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 6.7k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.7 Rating</span>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-skill="mobile">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Mobile Development</h3>
+                            <p>iOS & Android</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="75"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 9.1k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.6 Rating</span>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-skill="cloud">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Cloud Computing</h3>
+                            <p>AWS, Azure, GCP</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="88"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 7.5k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                    </div>
+                </div>
+
+                <div class="skill-card" data-skill="ai">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>Artificial Intelligence</h3>
+                            <p>ML & Deep Learning</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-progress="81"></div>
+                    </div>
+                    <div class="skill-stats">
+                        <span><i class="fas fa-users"></i> 5.2k Learners</span>
+                        <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Courses</h2>
+                <p>Start your learning journey with our expertly crafted courses</p>
+            </div>
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">All Courses</div>
+                <div class="filter-tab" data-filter="beginner">Beginner</div>
+                <div class="filter-tab" data-filter="intermediate">Intermediate</div>
+                <div class="filter-tab" data-filter="advanced">Advanced</div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card" data-category="beginner">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course1/400/200" alt="Course">
+                        <div class="course-badge">Bestseller</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Complete Web Development Bootcamp</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p class="course-description">Learn HTML, CSS, JavaScript, React, Node.js and more in this comprehensive bootcamp.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$89.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>42 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-category="intermediate">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course2/400/200" alt="Course">
+                        <div class="course-badge">New</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Data Science with Python</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p class="course-description">Master data analysis, visualization, and machine learning with Python and popular libraries.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$79.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>35 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-category="advanced">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course3/400/200" alt="Course">
+                        <div class="course-badge">Advanced</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Machine Learning A-Z</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <p class="course-description">From basic to advanced ML algorithms with real-world projects and applications.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$99.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>48 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-category="beginner">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course4/400/200" alt="Course">
+                        <div class="course-badge">Popular</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">UI/UX Design Fundamentals</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <p class="course-description">Learn design principles, user research, prototyping, and create stunning interfaces.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$69.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>28 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-category="intermediate">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course5/400/200" alt="Course">
+                        <div class="course-badge">Updated</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">React Native Mobile Apps</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                        </div>
+                        <p class="course-description">Build cross-platform mobile applications with React Native and Expo.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$74.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>32 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" data-category="advanced">
+                    <div class="course-image">
+                        <img src="https://picsum.photos/seed/course6/400/200" alt="Course">
+                        <div class="course-badge">Expert</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Cloud Architecture Masterclass</h3>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <p class="course-description">Design scalable cloud solutions with AWS, Azure, and best practices.</p>
+                        <div class="course-meta">
+                            <div class="course-price">$119.99</div>
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>45 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths -->
+    <section class="learning-paths" id="paths">
+        <div class="container">
+            <div class="section-header">
+                <h2>Personalized Learning Paths</h2>
+                <p>Follow structured paths designed to take you from beginner to expert</p>
+            </div>
+            <div class="paths-container">
+                <div class="path-card">
+                    <div class="path-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="path-title">Full Stack Developer</h3>
+                    <p class="path-description">Master both frontend and backend technologies to become a complete web developer</p>
+                    <div class="path-steps">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="selectPath('fullstack')">Start Path</button>
+                </div>
+
+                <div class="path-card">
+                    <div class="path-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="path-title">Data Scientist</h3>
+                    <p class="path-description">Learn to analyze data, build models, and extract insights from complex datasets</p>
+                    <div class="path-steps">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot active"></div>
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="selectPath('datascience')">Start Path</button>
+                </div>
+
+                <div class="path-card">
+                    <div class="path-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="path-title">UX Designer</h3>
+                    <p class="path-description">Create beautiful and intuitive user experiences through research and design</p>
+                    <div class="path-steps">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                        <div class="step-dot"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="selectPath('uxdesign')">Start Path</button>
+                </div>
+
+                <div class="path-card">
+                    <div class="path-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="path-title">Mobile Developer</h3>
+                    <p class="path-description">Build native and cross-platform mobile applications for iOS and Android</p>
+                    <div class="path-steps">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <button class="btn btn-primary" onclick="selectPath('mobile')">Start Path</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label">Active Learners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="1200">0</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="350">0</div>
+                    <div class="stat-label">Quality Courses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Success Rate %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Learners Say</h2>
+                <p>Join thousands of successful professionals who transformed their careers</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">"SkillForge completely transformed my career. The structured learning paths and expert instructors helped me land my dream job as a full-stack developer. I couldn't be happier!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://picsum.photos/seed/person1/60/60" alt="Author">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Full Stack Developer at TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The data science courses are incredibly comprehensive. I went from knowing nothing about ML to building complex models in just 6 months. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://picsum.photos/seed/person2/60/60" alt="Author">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Data Scientist at DataFlow Inc</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"As a career changer, SkillForge gave me the confidence and skills I needed. The community support and real-world projects made all the difference."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="https://picsum.photos/seed/person3/60/60" alt="Author">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>UX Designer at Creative Studio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <div class="testimonial-dot active" onclick="showTestimonial(0)"></div>
+                <div class="testimonial-dot" onclick="showTestimonial(1)"></div>
+                <div class="testimonial-dot" onclick="showTestimonial(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Get the latest courses, learning tips, and exclusive offers delivered to your inbox</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">
+                        Subscribe <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkillForge</h3>
+                    <p>Empowering learners worldwide with quality education and career transformation opportunities.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#courses">All Courses</a></li>
+                        <li><a href="#paths">Learning Paths</a></li>
+                        <li><a href="#skills">Skill Assessment</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Instructors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SkillForge. All rights reserved. Made with <i class="fas fa-heart" style="color: var(--accent-color);"></i> for learners worldwide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Skills progress animation
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressFills = entry.target.querySelectorAll('.progress-fill');
+                    progressFills.forEach(fill => {
+                        const progress = fill.getAttribute('data-progress');
+                        setTimeout(() => {
+                            fill.style.width = progress + '%';
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.querySelector('.skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+
+        // Course filtering
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const courseCards = document.querySelectorAll('.course-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                courseCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.remove('active');
+                testimonialDots[i].classList.remove('active');
+            });
+            
+            testimonials[index].classList.add('active');
+            testimonialDots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Statistics counter animation
+        const statObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 100;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.floor(current).toLocaleString();
+                        }, 20);
+                    });
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statObserver.observe(statsSection);
+        }
+
+        // Newsletter subscription
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            showToast(`Thank you for subscribing with ${email}!`);
+            event.target.reset();
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Learning path selection
+        function selectPath(pathName) {
+            showToast(`You've selected the ${pathName} learning path! Redirecting...`);
+            // In a real application, this would redirect to the learning path page
+        }
+
+        // Course card click handler
+        courseCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const courseTitle = this.querySelector('.course-title').textContent;
+                showToast(`Opening ${courseTitle}...`);
+                // In a real application, this would navigate to the course details page
+            });
+        });
+
+        // Add hover effect to skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add entrance animations
+            const elements = document.querySelectorAll('.skill-card, .course-card, .path-card, .stat-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subham's Logic Hub - YouTube Channel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF0000;
+            --primary-dark: #CC0000;
+            --dark-bg: #030303;
+            --darker-bg: #080808;
+            --light-bg: #181818;
+            --text-primary: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --border-color: #272727;
+            --hover-bg: #272727;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--darker-bg);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 20px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 8px 40px 8px 15px;
+            background-color: var(--light-bg);
+            border: none;
+            border-radius: 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Banner Section */
+        .banner {
+            position: relative;
+            height: 250px;
+            background: linear-gradient(135deg, #0c5f00, #003366);
+            overflow: hidden;
+        }
+
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .banner .highlight {
+            color: #7FFF00;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* Channel Info */
+        .channel-info {
+            display: flex;
+            padding: 20px;
+            background-color: var(--light-bg);
+            gap: 20px;
+            align-items: center;
+        }
+
+        .channel-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .channel-details {
+            flex: 1;
+        }
+
+        .channel-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .channel-stats {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .channel-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Content Section */
+        .content {
+            padding: 20px;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-color: var(--darker-bg);
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .video-meta i {
+            font-size: 16px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--darker-bg);
+            padding: 20px;
+            transition: left 0.3s;
+            z-index: 1001;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .close-menu {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-item {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 10px;
+            }
+            
+            .search-container {
+                display: none;
+            }
+            
+            .banner h1 {
+                font-size: 32px;
+            }
+            
+            .channel-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="menu-icon" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <span>Subham's Logic Hub</span>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search videos..." id="searchInput">
+                <button class="search-btn" onclick="searchVideos()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="header-nav">
+                <div class="nav-item">Home</div>
+                <div class="nav-item">Videos</div>
+                <div class="nav-item">Playlists</div>
+                <div class="nav-item">About</div>
+            </div>
+            
+            <div class="user-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <span>Subham's Logic Hub</span>
+            </div>
+            <div class="close-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="mobile-menu-item">Home</div>
+        <div class="mobile-menu-item">Videos</div>
+        <div class="mobile-menu-item">Playlists</div>
+        <div class="mobile-menu-item">About</div>
+        <div class="mobile-menu-item">Contact</div>
+        <div class="mobile-menu-item">Settings</div>
+    </div>
+
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1>Learn <span class="highlight">Logic</span> with Subham</h1>
+            <p>Master programming concepts and problem-solving techniques</p>
+        </div>
+    </section>
+
+    <!-- Channel Info -->
+    <section class="channel-info">
+        <div class="channel-avatar">SLH</div>
+        <div class="channel-details">
+            <div class="channel-name">Subham's Logic Hub</div>
+            <div class="channel-stats">125K subscribers • 245 videos</div>
+            <div class="channel-actions">
+                <button class="btn btn-primary" onclick="subscribe()">
+                    <i class="fas fa-plus"></i> Subscribe
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-bell"></i> Notify
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab(this, 'videos')">Videos</div>
+        <div class="tab" onclick="switchTab(this, 'playlists')">Playlists</div>
+        <div class="tab" onclick="switchTab(this, 'community')">Community</div>
+        <div class="tab" onclick="switchTab(this, 'channels')">Channels</div>
+        <div class="tab" onclick="switchTab(this, 'about')">About</div>
+    </div>
+
+    <!-- Content Section -->
+    <section class="content">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterVideos(this, 'all')">All</button>
+            <button class="filter-btn" onclick="filterVideos(this, 'recent')">Recent</button>
+            <button class="filter-btn" onclick="filterVideos(this, 'popular')">Popular</button>
+            <button class="filter-btn" onclick="filterVideos(this, 'tutorials')">Tutorials</button>
+            <button class="filter-btn" onclick="filterVideos(this, 'challenges')">Challenges</button>
+        </div>
+
+        <div class="video-grid" id="videoGrid">
+            <!-- Videos will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <script>
+        // Sample video data
+        const videos = [
+            {
+                id: 1,
+                title: "Mastering JavaScript Closures in 15 Minutes",
+                duration: "15:42",
+                views: "125K",
+                uploadTime: "2 days ago",
+                thumbnail: "https://picsum.photos/seed/js1/400/225.jpg",
+                category: "tutorials"
+            },
+            {
+                id: 2,
+                title: "10 Python Coding Challenges for Beginners",
+                duration: "22:18",
+                views: "89K",
+                uploadTime: "1 week ago",
+                thumbnail: "https://picsum.photos/seed/py1/400/225.jpg",
+                category: "challenges"
+            },
+            {
+                id: 3,
+                title: "Advanced Data Structures Explained",
+                duration: "18:35",
+                views: "210K",
+                uploadTime: "3 days ago",
+                thumbnail: "https://picsum.photos/seed/ds1/400/225.jpg",
+                category: "tutorials"
+            },
+            {
+                id: 4,
+                title: "Algorithm Design Patterns You Should Know",
+                duration: "27:52",
+                views: "156K",
+                uploadTime: "5 days ago",
+                thumbnail: "https://picsum.photos/seed/algo1/400/225.jpg",
+                category: "tutorials"
+            },
+            {
+                id: 5,
+                title: "React Hooks Deep Dive",
+                duration: "19:45",
+                views: "78K",
+                uploadTime: "2 weeks ago",
+                thumbnail: "https://picsum.photos/seed/react1/400/225.jpg",
+                category: "tutorials"
+            },
+            {
+                id: 6,
+                title: "Weekly Coding Challenge #42",
+                duration: "14:20",
+                views: "45K",
+                uploadTime: "1 day ago",
+                thumbnail: "https://picsum.photos/seed/chal1/400/225.jpg",
+                category: "challenges"
+            },
+            {
+                id: 7,
+                title: "Database Optimization Techniques",
+                duration: "24:10",
+                views: "92K",
+                uploadTime: "4 days ago",
+                thumbnail: "https://picsum.photos/seed/db1/400/225.jpg",
+                category: "tutorials"
+            },
+            {
+                id: 8,
+                title: "Weekly Coding Challenge #41",
+                duration: "16:55",
+                views: "67K",
+                uploadTime: "1 week ago",
+                thumbnail: "https://picsum.photos/seed/chal2/400/225.jpg",
+                category: "challenges"
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayVideos(videos);
+        });
+
+        // Display videos in the grid
+        function displayVideos(videosToDisplay) {
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+            
+            videosToDisplay.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.onclick = () => alert(`Playing video: ${video.title}`);
+                
+                videoCard.innerHTML = `
+                    <div class="video-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="video-duration">${video.duration}</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-meta">
+                            <i class="fas fa-eye"></i>
+                            <span>${video.views} views</span>
+                            <span>•</span>
+                            <span>${video.uploadTime}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoGrid.appendChild(videoCard);
+            });
+        }
+
+        // Filter videos by category
+        function filterVideos(button, category) {
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            
+            // Filter videos
+            if (category === 'all') {
+                displayVideos(videos);
+            } else {
+                const filteredVideos = videos.filter(video => video.category === category);
+                displayVideos(filteredVideos);
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tabElement, tabName) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+            
+            // Here you would typically load different content based on the tab
+            console.log(`Switched to ${tabName} tab`);
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Toggle theme (light/dark mode)
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Subscribe function
+        function subscribe() {
+            const button = event.target.closest('.btn-primary');
+            const isSubscribed = button.classList.contains('subscribed');
+            
+            if (isSubscribed) {
+                button.innerHTML = '<i class="fas fa-plus"></i> Subscribe';
+                button.classList.remove('subscribed');
+            } else {
+                button.innerHTML = '<i class="fas fa-check"></i> Subscribed';
+                button.classList.add('subscribed');
+            }
+        }
+
+        // Search videos
+        function searchVideos() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (searchTerm === '') {
+                displayVideos(videos);
+                return;
+            }
+            
+            const filteredVideos = videos.filter(video => 
+                video.title.toLowerCase().includes(searchTerm)
+            );
+            
+            displayVideos(filteredVideos);
+        }
+
+        // Handle Enter key in search bar
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchVideos();
+            }
+        });
+    </script>
+</body>
+</html>
